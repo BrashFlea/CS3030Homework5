@@ -20,7 +20,7 @@ def atm():
 
 def validate_pin(arg):
     """
-    Validate that user pin is 4 digits
+    Validate that user pin is 4 digits and contins no characters
     Args:
         PIN
     Returns:
@@ -41,25 +41,28 @@ arg = input('Enter your PIN: ')
 pin = "1234"
 tries = 3
 while(tries > 0):
+    tries = tries - 1
+
     if validate_pin(arg) ==  True:
         if arg == pin:
             print("Your PIN is correct")
             exit(0)
-        else:              
+        else:
             print("Your PIN is incorrect")
-            tries = tries - 1
-            arg = input('Enter your PIN: ')
+            if tries == 0:
+                print("Your bank card is blocked")
+                exit(1)
+            else:
+                arg = input('Enter your PIN: ')
 
     if validate_pin(arg) == False:
         print("Invalid PIN format. Correct format is: <9876>")
-        tries = tries - 1
-        arg = input('Enter your PIN: ')
+        if tries == 0:
+            print("Your bank card is blocked")
+            exit(1)
+        else:
+            arg = input('Enter your PIN: ')
         
-if tries == 0:
-    print("Your bank card is blocked")
-    exit(1)
-
-
 
 # Main function
 def main():
